@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class CharacterDnD {
+ class CharacterDnD {
 
     private int level;
     int classIndex;
@@ -17,7 +17,7 @@ public class CharacterDnD {
     private int dmg;
 
 
-    public void getName() {
+     void getName() {
         String name;
         Scanner sc = new Scanner(System.in);
         System.out.printf("Enter your Character Name >>>");
@@ -40,15 +40,15 @@ public class CharacterDnD {
         return level;
     }
 
-    public int getLevel() {
+     int getLevel() {
         return level;
     }
 
-    public void setLevel() {
+     void setLevel() {
 
         this.level = getUserLevel();
     }
-    public void setClass() {
+     void setClass() {
         System.out.print("\n Select A Class for Your Character, \n");
         System.out.println("__________________________________\n\n");
         clas.printClasses();
@@ -88,7 +88,7 @@ public class CharacterDnD {
         return hitPoints;
     }
 
-    public void rollChoice() {
+     void rollChoice() {
         Scanner sc = new Scanner(System.in);
         String choice;
         do {
@@ -149,18 +149,24 @@ public class CharacterDnD {
 
     private void generateAttrib(String type) {
 
-        if (type.equals("get")) {
-            Ability.getUser();
-        } else if (type.equals("9d6")) {
-            Ability.set9(clas);
-        } else if (type.equals("4d6")) {
-            Ability.set4d6();
-        } else if (type.equals("4d6_16")) {
-            Ability.set4d6_16();
-        } else {
-            System.out.println("Error not a valid roll type selection ! ");
-            System.out.println("---------- *Roll Type set to default*---------");
-            Ability.set4d6();
+        switch (type) {
+            case "get":
+                Ability.getUser();
+                break;
+            case "9d6":
+                Ability.set9(clas);
+                break;
+            case "4d6":
+                Ability.set4d6();
+                break;
+            case "4d6_16":
+                Ability.set4d6_16();
+                break;
+            default:
+                System.out.println("Error not a valid roll type selection ! ");
+                System.out.println("---------- *Roll Type set to default*---------");
+                Ability.set4d6();
+                break;
         }
         Ability.calBonus();
     }
@@ -172,7 +178,7 @@ public class CharacterDnD {
         setHitPoints();
     }
 
-    public void getSkills() {
+     void getSkills() {
         int pts = clas.getSkillPoints(this);
         System.out.println("\n\n");
         skill.skillPrinter();
@@ -268,7 +274,7 @@ public class CharacterDnD {
     }
 
 
-    public void printFormat() {
+     void printFormat() {
         System.out.printf("--------------------------------\n");
         System.out.println("\n" +
                 "\\ \\/ /  ____   __  __   _____          \n" +
@@ -302,7 +308,7 @@ public class CharacterDnD {
     }
 
 
-    public void write() {
+     void write() {
         File file = new File("DnD Character - " + name);
         FileOutputStream fos = null;
         try {
